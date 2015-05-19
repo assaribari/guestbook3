@@ -1,11 +1,8 @@
-<%@page import="com.sds.icto.guestbook.vo.GuestBookVo"%>
-<%@page import="java.util.List"%>
-<%@page import="com.sds.icto.guestbook.dao.GuestBookDao"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%> 
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<% 
-	GuestBookDao dao = new GuestBookDao();
-	List<GuestBookVo> list = dao.fetchList();
-%>
+
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -26,24 +23,22 @@
 		</tr>
 	</table>
 	</form>
-	
-	<%
-		for( GuestBookVo vo : list ) {
-	%>
-	<br>
-	<table width=510 border=1>
-		<tr>
-			<td>[<%=vo.getNo() %>]</td>
-			<td><%=vo.getName() %></td>
-			<td><%=vo.getSysdate() %></td>
-			<td><a href="/guestbook2/view/deleteform.jsp?no=<%=vo.getNo()%>">삭제</a></td>
-		</tr>
-		<tr>
-			<td colspan=4><%=vo.getMessage() %></td>
-		</tr>
-	</table>
-	<%
-		}
-	%>
+
+	<c:forEach items="${list }" var="vo">
+		<br>
+		<table width=510 border=1>
+			<tr>
+				<td>[${vo.no }]
+				</td>
+				<td>${vo.name }</td>
+				<td>${vo.sysdate }</td>
+				<td><a
+					href="/guestbook3/delete?no=${vo.no }">삭제</a></td>
+			</tr>
+			<tr>
+				<td colspan=4>${ vo.message }</td>
+			</tr>
+		</table>
+	</c:forEach>
 </body>
 </html>
