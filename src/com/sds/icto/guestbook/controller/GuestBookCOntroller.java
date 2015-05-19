@@ -56,7 +56,7 @@ public class GuestBookCOntroller {
 			@RequestParam("no") String no,
 			@RequestParam("password") String password
 			){
-		System.out.println(no + "와" + password);
+
 		GuestBookDao.delete(Long.parseLong(no), password);
 		
 		return "redirect:/index";
